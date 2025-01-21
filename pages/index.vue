@@ -1,9 +1,27 @@
 <template>
+    <div class="scroll-watcher"></div>
     <Page class="night">
-        <h1>Maxime Sanciaume</h1>
-        <h2>juste un dev passioné</h2>
-        <h3>pour vous montrer mes projets</h3>
-        <!-- TODO: faire le sommaire -->
+        <div class="mega-center">
+            <div class="">
+                <div class="d-inline-flex">
+                    <div class="d-inline">
+                        <img src="/pictures/troma.jpg" alt="un beau tromatisme" height="200px">
+                    </div>
+                    <div class="d-inline ms-4">
+                        <h1>Maxime Sanciaume</h1>
+                        <h2>juste un dev passioné</h2>
+                        <h3>pour vous montrer mes projets</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <a href="" class="btn-primary">a</a>
+                <a href="" class="btn-primary">b</a>
+                <a href="" class="btn-primary">c</a>
+                <a href="" class="btn-primary">d</a>
+                <a href="" class="btn-primary">e</a>
+            </div>
+        </div>
     </Page>
     <Page style="background-color: #301212;">
         <h1>Mes nouveaux projets :</h1>
@@ -18,16 +36,49 @@
 </template>
 
 <style>
+/* for scroll animation */
+.scroll-watcher{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 5px;
+    z-index: 1000;
+    background-color: rgb(7, 118, 118);
+    scale: 0 1;
+    transform-origin: left;
+
+    animation: scroll-watcher linear;
+    animation-timeline: scroll();
+}
+
+@keyframes scroll-watcher{
+    to {
+        scale: 1 1;
+    }
+}
+
+.mega-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
 canvas.night {
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 0;
 }
 
-div.night {
-    position: relative;
-    z-index: 1;
+div.night{
     background-color: #0f1821;
+}
+
+.night div {
+    position: relative;
+    z-index: 2;
 }
 </style>
 
@@ -75,7 +126,7 @@ onMounted(() => {
             let star : any = {};
             star.x = Math.random() * current.width;
             star.y = Math.random() * current.height;
-            star.size = Math.random() * 3;
+            star.size = (Math.random() * 2) + .5;
             star.color = generateColor();
             let speed = .125;
             star.xvelocity = (Math.random()*speed*2)-speed;
