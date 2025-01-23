@@ -5,7 +5,7 @@
             <div class="">
                 <div class="d-inline-flex">
                     <div class="d-inline">
-                        <img src="/pictures/troma.jpg" alt="un beau tromatisme" height="200px">
+                        <img src="/pictures/troma.jpg" alt="un beau tromatisme" class="profile" height="200px">
                     </div>
                     <div class="d-inline ms-4">
                         <h1>Maxime Sanciaume</h1>
@@ -15,11 +15,10 @@
                 </div>
             </div>
             <div class="">
-                <a href="" class="btn-primary">a</a>
-                <a href="" class="btn-primary">b</a>
-                <a href="" class="btn-primary">c</a>
-                <a href="" class="btn-primary">d</a>
-                <a href="" class="btn-primary">e</a>
+                <NuxtLink to="#" class="menu btn btn-primary mx-2 mt-3">Projets reecents</NuxtLink>
+                <NuxtLink to="#" class="menu btn btn-primary mx-2 mt-3">Tout mes projets</NuxtLink>
+                <NuxtLink to="#" class="menu btn btn-primary mx-2 mt-3">Mon parcours</NuxtLink>
+                <NuxtLink to="#" class="menu btn btn-primary mx-2 mt-3">Me contacter</NuxtLink>
             </div>
         </div>
     </Page>
@@ -36,6 +35,11 @@
 </template>
 
 <style>
+.profile {
+    border-radius: 50%;
+    border:5px solid #fff;
+}
+
 /* for scroll animation */
 .scroll-watcher{
     position: fixed;
