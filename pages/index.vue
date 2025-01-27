@@ -1,6 +1,6 @@
 <template>
     <div class="scroll-watcher"></div>
-    <Page class="night">
+    <Page class="night" >
         <div class="mega-center">
             <div class="">
                 <div class="d-inline-flex">
@@ -22,8 +22,11 @@
             </div>
         </div>
     </Page>
-    <Page style="background-color: #301212;">
+    <Page class="night">
         <h1>Mes nouveaux projets :</h1>
+        <p>
+            {{ projects }}
+        </p>
     </Page>
     <Page style="background-color: #121230">
         <h1>Mon Parcours</h1>
@@ -35,6 +38,10 @@
 </template>
 
 <style>
+.menu {
+    width:150px;
+}
+
 .profile {
     border-radius: 50%;
     border:5px solid #fff;
@@ -87,6 +94,13 @@ div.night{
 </style>
 
 <script lang="ts" setup>
+
+//call api/getProjects on server
+
+const all = await useFetch("/api/project/getrecent");
+const projects = ref(all.data);
+
+
 //partie du code pour gerer la class night
 
 let generateColor = function(){
@@ -106,6 +120,7 @@ let generateColor = function(){
 }
 
 onMounted(() => {
+    
 
     let stars : any = {};
     let genIndex = 0;
