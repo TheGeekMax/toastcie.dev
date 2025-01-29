@@ -1,8 +1,8 @@
 import { db } from "~/composables/read";
 
-function getRecentProjects(): Promise<ProjectList> {
+function getAllProjects(): Promise<ProjectList> {
     return new Promise((resolve, reject) => {
-        db.all("SELECT * FROM Projects ORDER BY id DESC LIMIT 4", (err, rows) => {
+        db.all("SELECT * FROM Projects ORDER BY id ASC;", (err, rows) => {
             if (err) {
                 console.error(err.message);
                 reject(err);
@@ -14,5 +14,5 @@ function getRecentProjects(): Promise<ProjectList> {
 }
 
 export default defineEventHandler(() => {
-    return getRecentProjects();
+    return getAllProjects();
 });

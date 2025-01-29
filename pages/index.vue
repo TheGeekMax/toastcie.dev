@@ -22,11 +22,11 @@
             </div>
         </div>
     </Page>
-    <Page class="night">
-        <h1>Mes nouveaux projets :</h1>
-        <p>
-            {{ projects }}
-        </p>
+    <Page class="night mega-center">
+        <h1 class="my-3">Mes nouveaux projets :</h1>
+        <div class="centered">
+            <IndexProjectthumb v-for="project in projects" :title="project.name" :thumbnail="project.picpath" />
+        </div>
     </Page>
     <Page style="background-color: #121230">
         <h1>Mon Parcours</h1>
@@ -45,6 +45,44 @@
 .profile {
     border-radius: 50%;
     border:5px solid #fff;
+}
+
+.centered {
+
+    display: flex;
+    width: 70%;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    overflow-x: scroll;
+    margin: 0 auto;
+
+    mask-image: linear-gradient(to right, transparent, black 2%, black 95%, transparent);
+    
+
+    /* style scrollbar */
+    &::-webkit-scrollbar {
+        height: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #00008B;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #00008B transparent;
+
+    /* Edge */
+    & {
+        scrollbar-width: thin;
+        scrollbar-color: #00008B transparent;
+    }
 }
 
 /* for scroll animation */
