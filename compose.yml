@@ -1,0 +1,11 @@
+version: "3"
+services:
+  portfolio:
+    image: wikimax/portfolio
+    restart: always
+    volumes:
+      - type: bind
+        source: ./database.sqlite
+        target: /src/database.sqlite
+    ports:
+      - "3000:3000"
