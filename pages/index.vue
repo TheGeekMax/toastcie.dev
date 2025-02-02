@@ -1,5 +1,6 @@
 <template>
     <div class="scroll-watcher"></div>
+    <img src="/pictures/space.svg" alt="spaceship" id="scrollspace">
     <Page class="night" >
         <div class="mega-center">
             <div class="">
@@ -39,6 +40,16 @@
 
 <style>
 @import url("~/assets/css/nightSky.css");
+
+#scrollspace {
+    position: fixed;
+    bottom: 0;
+    right: 12%;
+    width: 32px;
+    height: 32px;
+    z-index: 5;
+}
+
 .menu {
     width:150px;
 }
@@ -125,6 +136,7 @@ const projects = ref(all.data);
 
 onMounted(() => {
     nightSky(document);
+    spaceshipScroll(document);
 });
 </script>
 
