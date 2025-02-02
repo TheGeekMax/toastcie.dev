@@ -1,5 +1,4 @@
 <template>
-    <div class="scroll-watcher"></div>
     <div id="scrollspace">
         <img src="/pictures/space.svg" alt="spaceship">
         <canvas id="shipparticle"></canvas>
@@ -107,27 +106,6 @@
     }
 }
 
-/* for scroll animation */
-.scroll-watcher{
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 5px;
-    z-index: 1000;
-    background-color: rgb(7, 118, 118);
-    scale: 0 1;
-    transform-origin: left;
-
-    animation: scroll-watcher linear;
-    animation-timeline: scroll();
-}
-
-@keyframes scroll-watcher{
-    to {
-        scale: 1 1;
-    }
-}
-
 .mega-center {
     display: flex;
     justify-content: center;
@@ -138,6 +116,19 @@
 </style>
 
 <script lang="ts" setup>
+
+useSeoMeta({
+  title: 'Maxime Sanciaume',
+  description: 'Mon site de projets',
+  ogTitle: 'Maxime Sanciaume',
+  ogDescription: 'Mon site de projets',
+  ogImage: '/pictures/troma.jpg',
+  ogUrl: 'https://toastcie.dev',
+  twitterTitle: 'Maxime Sanciaume',
+  twitterDescription: 'Mon site de projets',
+  twitterImage: '/pictures/troma.jpg',
+  twitterCard: 'summary'
+})
 
 //call api/getProjects on server
 
