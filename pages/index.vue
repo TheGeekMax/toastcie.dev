@@ -1,6 +1,9 @@
 <template>
     <div class="scroll-watcher"></div>
-    <img src="/pictures/space.svg" alt="spaceship" id="scrollspace">
+    <div id="scrollspace">
+        <img src="/pictures/space.svg" alt="spaceship">
+        <canvas id="shipparticle"></canvas>
+    </div>
     <Page class="night" >
         <div class="mega-center">
             <div class="">
@@ -29,7 +32,7 @@
             <IndexProjectthumb v-for="project in projects" :title="project.name" :thumbnail="project.picpath" />
         </div>
     </Page>
-    <Page id="myparcours" style="background-color: #121230">
+    <Page id="myparcours" class="night" style="background-color: #121230">
         <h1>Mon Parcours</h1>
     </Page>
     <Page id="contactme" style="background-color: #123012">
@@ -43,12 +46,19 @@
 
 #scrollspace {
     position: fixed;
+    display: inline;
     bottom: 0;
     right: 12%;
     width: 32px;
     height: 32px;
     z-index: 5;
+
+    img {
+        width: 256px;
+        height: 32px;
+    }
 }
+
 
 .menu {
     width:150px;
