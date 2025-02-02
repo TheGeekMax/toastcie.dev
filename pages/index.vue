@@ -1,5 +1,8 @@
 <template>
-    <div class="scroll-watcher"></div>
+    <div id="scrollspace">
+        <img src="/pictures/space.svg" alt="spaceship">
+        <canvas id="shipparticle"></canvas>
+    </div>
     <Page class="night" >
         <div class="mega-center">
             <div class="">
@@ -28,7 +31,7 @@
             <IndexProjectthumb v-for="project in projects" :title="project.name" :thumbnail="project.picpath" />
         </div>
     </Page>
-    <Page id="myparcours" style="background-color: #121230">
+    <Page id="myparcours" class="night" style="background-color: #121230">
         <h1>Mon Parcours</h1>
     </Page>
     <Page id="contactme" style="background-color: #123012">
@@ -39,6 +42,23 @@
 
 <style>
 @import url("~/assets/css/nightSky.css");
+
+#scrollspace {
+    position: fixed;
+    display: inline;
+    bottom: 0;
+    right: 12%;
+    width: 32px;
+    height: 32px;
+    z-index: 5;
+
+    img {
+        width: 256px;
+        height: 32px;
+    }
+}
+
+
 .menu {
     width:150px;
 }
@@ -86,27 +106,6 @@
     }
 }
 
-/* for scroll animation */
-.scroll-watcher{
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 5px;
-    z-index: 1000;
-    background-color: rgb(7, 118, 118);
-    scale: 0 1;
-    transform-origin: left;
-
-    animation: scroll-watcher linear;
-    animation-timeline: scroll();
-}
-
-@keyframes scroll-watcher{
-    to {
-        scale: 1 1;
-    }
-}
-
 .mega-center {
     display: flex;
     justify-content: center;
@@ -118,6 +117,19 @@
 
 <script lang="ts" setup>
 
+useSeoMeta({
+  title: 'Maxime Sanciaume',
+  description: 'Mon site de projets',
+  ogTitle: 'Maxime Sanciaume',
+  ogDescription: 'Mon site de projets',
+  ogImage: '/pictures/troma.jpg',
+  ogUrl: 'https://toastcie.dev',
+  twitterTitle: 'Maxime Sanciaume',
+  twitterDescription: 'Mon site de projets',
+  twitterImage: '/pictures/troma.jpg',
+  twitterCard: 'summary'
+})
+
 //call api/getProjects on server
 
 const all = await useFetch("/api/project/getrecent");
@@ -125,6 +137,7 @@ const projects = ref(all.data);
 
 onMounted(() => {
     nightSky(document);
+    spaceshipScroll(document);
 });
 </script>
 
