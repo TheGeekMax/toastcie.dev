@@ -6,7 +6,7 @@ canvas.night {
 }
 
 div.night{
-    background-color: #0f1821;
+    background-color: var(--night-1);
 }
 
 .night div {

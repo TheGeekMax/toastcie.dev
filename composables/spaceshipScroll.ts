@@ -37,7 +37,7 @@ export default function (document : Document) {
 
 
     const OCILATION = 1;
-
+    
     setInterval(() => {
         //get global scroll percent
         const scrollPercent = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 105;
