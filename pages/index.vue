@@ -25,13 +25,13 @@
             </div>
         </div>
     </Page>
-    <Page id="rprojs" class="night mega-center">
+    <Page id="rprojs" class="night mega-center" style="background: linear-gradient(180deg, var(--night-1) 0%, var(--night-1) 25%, var(--night-2) 75%, var(--night-2) 100%);">
         <h1 class="my-3">Mes nouveaux projets :</h1>
         <div class="centered">
             <IndexProjectthumb v-for="project in projects" :title="project.name" :thumbnail="project.picpath" />
         </div>
     </Page>
-    <Page id="myparcours" class="night" style="background-color: #121230">
+    <Page id="myparcours" class="night" style="background: linear-gradient(180deg, var(--night-2) 0%, var(--night-2) 25%, var(--night-3) 75%, var(--night-3) 100%);">
         <h1>Mon Parcours</h1>
     </Page>
     <Page id="contactme" style="background-color: #123012">
@@ -42,6 +42,12 @@
 
 <style>
 @import url("~/assets/css/nightSky.css");
+
+:root{
+    --night-1: rgba(15,24,33,1);
+    --night-2: rgb(3, 38, 55);
+    --night-3: rgb(66, 45, 4);
+}
 
 #scrollspace {
     position: fixed;
