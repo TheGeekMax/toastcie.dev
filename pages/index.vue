@@ -28,10 +28,10 @@
     <Page id="rprojs" class="night mega-center" style="background: linear-gradient(180deg, var(--night-1) 0%, var(--night-1) 25%, var(--night-2) 75%, var(--night-2) 100%);">
         <h1 class="my-3">Mes nouveaux projets :</h1>
         <div class="centered">
-            <IndexProjectthumb v-for="project in projects" :title="project.name" :thumbnail="project.picpath" />
+            <IndexProjectthumb v-for="project in projects" :title="project.name" :thumbnail="project.picpath" :url="project.url" />
         </div>
     </Page>
-    <Page id="myparcours" class="night" style="background: linear-gradient(180deg, var(--night-2) 0%, var(--night-2) 25%, var(--night-3) 75%, var(--night-3) 100%);">
+    <Page id="myparcours" class="night mega-center" style="background: linear-gradient(180deg, var(--night-2) 0%, var(--night-2) 25%, var(--night-3) 75%, var(--night-3) 100%);">
         <h1>Mon Parcours</h1>
     </Page>
     <Page id="contactme" style="background-color: #123012">
@@ -46,7 +46,7 @@
 :root{
     --night-1: rgba(15,24,33,1);
     --night-2: rgb(3, 38, 55);
-    --night-3: rgb(66, 45, 4);
+    --night-3: rgb(50, 34, 1);
 }
 
 #scrollspace {
