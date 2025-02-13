@@ -1,8 +1,6 @@
 <template>
     <div class="mega-center">
         <div>
-            <p>1D Rule</p>
-            
             <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                 <input type="radio" class="btn-check" name="btnradio" id="color_rb" autocomplete="off" @click="color_set_rainbow" checked>
                 <label class="btn btn-outline-primary" for="color_rb">Rainbow</label>
@@ -21,14 +19,27 @@
         <div>
             <input type="number" v-model="ruleNumber" @change="calcRule" />
             <p>run CA dim 1 <input type="checkbox" v-model="c1drun" /></p>
-            <input type="number" v-model="rules[0].value" @change="calcRuleNumber"/>
-            <input type="number" v-model="rules[1].value" @change="calcRuleNumber"/>
-            <input type="number" v-model="rules[2].value" @change="calcRuleNumber"/>
-            <input type="number" v-model="rules[3].value" @change="calcRuleNumber"/>
-            <input type="number" v-model="rules[4].value" @change="calcRuleNumber"/>
-            <input type="number" v-model="rules[5].value" @change="calcRuleNumber"/>
-            <input type="number" v-model="rules[6].value" @change="calcRuleNumber"/>
-            <input type="number" v-model="rules[7].value" @change="calcRuleNumber"/>
+
+            <div class="input-group">
+                <span class="input-group-text">1</span>
+                <span class="input-group-text">2</span>
+                <span class="input-group-text">4</span>
+                <span class="input-group-text">8</span>
+                <span class="input-group-text">16</span>
+                <span class="input-group-text">32</span>
+                <span class="input-group-text">64</span>
+                <span class="input-group-text">128</span>
+            </div>
+            <div class="input-group">
+                <input class="form-check-input" type="checkbox" v-model="rules[0].value" @change="calcRuleNumber(0)"/>
+                <input class="form-check-input" type="checkbox" v-model="rules[1].value" @change="calcRuleNumber(1)"/>
+                <input class="form-check-input" type="checkbox" v-model="rules[2].value" @change="calcRuleNumber(2)"/>
+                <input class="form-check-input" type="checkbox" v-model="rules[3].value" @change="calcRuleNumber(3)"/>
+                <input class="form-check-input" type="checkbox" v-model="rules[4].value" @change="calcRuleNumber(4)"/>
+                <input class="form-check-input" type="checkbox" v-model="rules[5].value" @change="calcRuleNumber(5)"/>
+                <input class="form-check-input" type="checkbox" v-model="rules[6].value" @change="calcRuleNumber(6)"/>
+                <input class="form-check-input" type="checkbox" v-model="rules[7].value" @change="calcRuleNumber(7)"/>
+            </div>
         </div>
     </div>
 </template>
@@ -60,8 +71,8 @@ const ruleNumber : Ref<number> = ref(126);
 const play : Ref<boolean> = ref(true);
 const c1drun : Ref<boolean> = ref(false);
 const autoRemove : Ref<Boolean> = ref(false);
-const rules : Ref<number>[] = [
-    ref(0), ref(0), ref(0), ref(0), ref(0), ref(0), ref(0), ref(0)
+const rules : Ref<boolean>[] = [
+    ref(false), ref(false), ref(false), ref(false), ref(false), ref(false), ref(false), ref(false)
 ];
 
 const color_rainbow : Ref<boolean> = ref(true);
@@ -168,16 +179,16 @@ function color_set_bw(){
 function calcRule(){
     let rule = ruleNumber.value;
     for(let i = 0; i < 8; i++){
-        rules[i].value = rule % 2;
+        rules[i].value = rule % 2 == 1;
         rule = Math.floor(rule / 2);
     }
 }
 
-function calcRuleNumber(){
+function calcRuleNumber(i : number){
     let rule = 0;
     for(let i = 7; i >= 0; i--){
         rule *= 2;
-        rule += rules[i].value;
+        rule += rules[i].value?1:0;
     }
     ruleNumber.value = rule;
     console.log(rule);
@@ -196,7 +207,7 @@ function getRuleNumber(x:number):number{
 }
 
 function getNextCell(x:number):number{
-    return rules[getRuleNumber(x)].value;
+    return rules[getRuleNumber(x)].value ? 1 : 0;
 }
 
 function d1step(){
@@ -350,5 +361,16 @@ function showGrid(){
     align-items: center;
     height: 100vh;
     flex-direction: column;
+}
+
+.form-check-input{
+    width:30px;
+    height:30px;
+}
+.input-group-text{
+    width:30px;
+    height:30px;
+    text-align:center;
+    padding:2px;
 }
 </style>
