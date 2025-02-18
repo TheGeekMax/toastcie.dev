@@ -8,6 +8,9 @@
                 <input type="radio" class="btn-check" name="btnradio" id="color_bw" autocomplete="off" @click="color_set_bw">
                 <label class="btn btn-outline-primary" for="color_bw">B/W</label>
             </div>
+            <p>{{ curHue }}</p>
+            <div id="colordivshow" :style="`background-color: hsl(${curHue}, 100%, 50%)`"></div>
+            <input type="range" v-model="curHue" min="1" max="360" step="0.5" />
             <p>auto remove <input type="checkbox" v-model="autoRemove" /></p>
             <button @click="reset">clear</button>
             <input class="d-none" type="checkbox" id="playcheckbox" v-model="play"/>
@@ -60,7 +63,7 @@ const COLOR_STEP = 0.5;
 const cols = WIDTH / CELL_SIZE;
 const rows = HEIGHT / CELL_SIZE;
 
-const curHue = ref(1);
+const curHue : Ref<number> = ref(1);
 
 
 const grid : number[][] = new Array(cols).fill(null).map(() => new Array(rows).fill(0));
@@ -78,7 +81,7 @@ const rules : Ref<boolean>[] = [
 const color_rainbow : Ref<boolean> = ref(true);
 
 //labels
-const playLabel = computed(() => play.value ? "play" : "pause");
+const playLabel = computed(() => play.value ? "pause" : "play");
 
 onMounted(() => {
     canvas = document.getElementById("ca") as HTMLCanvasElement;
@@ -121,6 +124,7 @@ onMounted(() => {
     let frame = 0;
     calcRule();
     setInterval(() => {
+        curHue.value = curHue.value as number;
         clear();
         showGrid();
 
@@ -161,7 +165,7 @@ function draw_pixel(){
     grid[x][y] = curHue.value;
     curHue.value += COLOR_STEP;
 
-    if(curHue.value > 360) curHue.value = 1;
+    if(curHue.value > 360) curHue.value -= 360;
 }
 
 //for radiobutton handling
@@ -227,7 +231,7 @@ function copyond2(){
         grid[i][0] = ca[i]*curHue.value;
     }
     curHue.value += COLOR_STEP;
-    if(curHue.value > 360) curHue.value = 1;
+    if(curHue.value > 360) curHue.value -= 360;
 }
 
 
@@ -372,5 +376,12 @@ function showGrid(){
     height:30px;
     text-align:center;
     padding:2px;
+}
+
+#colordivshow{
+    display:inline-block;
+    width: 32px;
+    height: 32px;
+    border: 1px solid black;
 }
 </style>
