@@ -10,7 +10,8 @@
             </div>
             <p>{{ curHue }}</p>
             <div id="colordivshow" :style="`background-color: hsl(${curHue}, 100%, 50%)`"></div>
-            <input type="range" v-model="curHue" min="1" max="360" step="0.5" />
+            <input id="color_range" type="range" min="1" max="360" step="0.5" value="1" @input="update_hue($event)"/>
+            <p>auto hue <input type="checkbox" v-model="autohue" /></p>
             <p>auto remove <input type="checkbox" v-model="autoRemove" /></p>
             <button @click="reset">clear</button>
             <input class="d-none" type="checkbox" id="playcheckbox" v-model="play"/>
@@ -50,6 +51,7 @@
 <script lang="ts" setup>
 let canvas : HTMLCanvasElement;
 let ctx : CanvasRenderingContext2D|null;
+let color_range : HTMLInputElement;
 
 let drawing = false;
 let penX = 0;
@@ -64,7 +66,7 @@ const cols = WIDTH / CELL_SIZE;
 const rows = HEIGHT / CELL_SIZE;
 
 const curHue : Ref<number> = ref(1);
-
+const autohue : Ref<Boolean> = ref(true);
 
 const grid : number[][] = new Array(cols).fill(null).map(() => new Array(rows).fill(0));
 
@@ -86,6 +88,7 @@ const playLabel = computed(() => play.value ? "pause" : "play");
 onMounted(() => {
     canvas = document.getElementById("ca") as HTMLCanvasElement;
     ctx = canvas.getContext("2d");
+    color_range = document.getElementById("color_range") as HTMLInputElement;
 
     if(!ctx){
         console.error("Canvas not supported");
@@ -163,9 +166,12 @@ function draw_pixel(){
     }
 
     grid[x][y] = curHue.value;
-    curHue.value += COLOR_STEP;
+    curHue.value += COLOR_STEP*(autohue.value?1:0);
+
 
     if(curHue.value > 360) curHue.value -= 360;
+
+    color_range.value = curHue.value.toString();
 }
 
 //for radiobutton handling
@@ -176,6 +182,10 @@ function color_set_rainbow(){
 
 function color_set_bw(){
     color_rainbow.value = false;
+}
+
+function update_hue(event: Event){
+    curHue.value = Number((event.target as HTMLInputElement).value);
 }
 
 //for 1D CA calcs
@@ -230,8 +240,9 @@ function copyond2(){
     for(let i = 0; i < cols; i++){
         grid[i][0] = ca[i]*curHue.value;
     }
-    curHue.value += COLOR_STEP;
+    curHue.value += COLOR_STEP*(autohue.value?1:0);
     if(curHue.value > 360) curHue.value -= 360;
+    color_range.value = curHue.value.toString();
 }
 
 
