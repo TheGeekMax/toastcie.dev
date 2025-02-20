@@ -21,8 +21,20 @@
 
         </canvas>
         <div>
+            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" name="btnradio" id="ca_none" autocomplete="off" @click="set_type(c1type.None)">
+                <label class="btn btn-outline-primary" for="ca_none">None</label>
+
+                <input type="radio" class="btn-check" name="btnradio" id="ca_center" autocomplete="off" @click="set_type(c1type.Center)" checked>
+                <label class="btn btn-outline-primary" for="ca_center">Center</label>
+
+                <input type="radio" class="btn-check" name="btnradio" id="ca_random" autocomplete="off" @click="set_type(c1type.Random)">
+                <label class="btn btn-outline-primary" for="ca_random">Random</label>
+            </div>
+            <p>run 1d simulation <input type="checkbox" v-model="c1drun" /></p>
+
             <input type="number" v-model="ruleNumber" @change="calcRule" />
-            <p>run CA dim 1 <input type="checkbox" v-model="c1drun" /></p>
+            
 
             <div class="input-group">
                 <span class="input-group-text">1</span>
@@ -44,11 +56,18 @@
                 <input class="form-check-input" type="checkbox" v-model="rules[6].value" @change="calcRuleNumber(6)"/>
                 <input class="form-check-input" type="checkbox" v-model="rules[7].value" @change="calcRuleNumber(7)"/>
             </div>
+            <button @click="reset1dca">reset 1D simulation simulation</button>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
+enum c1type{
+    None,
+    Center,
+    Random,
+}
+
 let canvas : HTMLCanvasElement;
 let ctx : CanvasRenderingContext2D|null;
 let color_range : HTMLInputElement;
@@ -81,6 +100,7 @@ const rules : Ref<boolean>[] = [
 ];
 
 const color_rainbow : Ref<boolean> = ref(true);
+const ctype : Ref<c1type> = ref(c1type.Center);
 
 //labels
 const playLabel = computed(() => play.value ? "pause" : "play");
@@ -188,7 +208,28 @@ function update_hue(event: Event){
     curHue.value = Number((event.target as HTMLInputElement).value);
 }
 
+function set_type (type: c1type){
+    ctype.value = type;
+}
+
 //for 1D CA calcs
+
+function reset1dca(){
+    switch(ctype.value){
+        case c1type.None:
+            ca.fill(0);
+            break;
+        case c1type.Center:
+            ca.fill(0);
+            ca[Math.floor(cols/2)] = 1;
+            break;
+        case c1type.Random:
+            for(let i = 0; i < cols; i++){
+                ca[i] = Math.floor(Math.random() * 2);
+            }
+            break;
+    }
+}
 
 function calcRule(){
     let rule = ruleNumber.value;
