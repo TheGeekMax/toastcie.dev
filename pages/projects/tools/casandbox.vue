@@ -12,23 +12,23 @@
             <div id="colordivshow" :style="`background-color: hsl(${curHue}, 100%, 50%)`"></div>
             <input id="color_range" type="range" min="1" max="360" step="0.5" value="1" @input="update_hue($event)"/>
             <p>auto hue <input type="checkbox" v-model="autohue" /></p>
+            <p>hue step <input type="number" v-model="COLOR_STEP" step="0.5" /></p>
             <p>auto remove <input type="checkbox" v-model="autoRemove" /></p>
             <button @click="reset">clear</button>
             <input class="d-none" type="checkbox" id="playcheckbox" v-model="play"/>
             <label class="btn btn-primary" for="playcheckbox">  {{ playLabel }}</label>
         </div>
         <canvas id="ca">
-
         </canvas>
         <div>
             <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" class="btn-check" name="btnradio" id="ca_none" autocomplete="off" @click="set_type(c1type.None)">
+                <input type="radio" class="btn-check" name="ctype" id="ca_none" autocomplete="off" @click="set_type(c1type.None)">
                 <label class="btn btn-outline-primary" for="ca_none">None</label>
 
-                <input type="radio" class="btn-check" name="btnradio" id="ca_center" autocomplete="off" @click="set_type(c1type.Center)" checked>
+                <input type="radio" class="btn-check" name="ctype" id="ca_center" autocomplete="off" @click="set_type(c1type.Center)" checked>
                 <label class="btn btn-outline-primary" for="ca_center">Center</label>
 
-                <input type="radio" class="btn-check" name="btnradio" id="ca_random" autocomplete="off" @click="set_type(c1type.Random)">
+                <input type="radio" class="btn-check" name="ctype" id="ca_random" autocomplete="off" @click="set_type(c1type.Random)">
                 <label class="btn btn-outline-primary" for="ca_random">Random</label>
             </div>
             <p>run 1d simulation <input type="checkbox" v-model="c1drun" /></p>
@@ -79,7 +79,7 @@ let penY = 0;
 const WIDTH = 600;
 const HEIGHT = 600;
 const CELL_SIZE = 5;
-const COLOR_STEP = 0.5;
+const COLOR_STEP = ref(0.5);
 
 const cols = WIDTH / CELL_SIZE;
 const rows = HEIGHT / CELL_SIZE;
@@ -186,7 +186,7 @@ function draw_pixel(){
     }
 
     grid[x][y] = curHue.value;
-    curHue.value += COLOR_STEP*(autohue.value?1:0);
+    curHue.value += COLOR_STEP.value*(autohue.value?1:0);
 
 
     if(curHue.value > 360) curHue.value -= 360;
@@ -281,7 +281,7 @@ function copyond2(){
     for(let i = 0; i < cols; i++){
         grid[i][0] = ca[i]*curHue.value;
     }
-    curHue.value += COLOR_STEP*(autohue.value?1:0);
+    curHue.value += COLOR_STEP.value *(autohue.value?1:0);
     if(curHue.value > 360) curHue.value -= 360;
     color_range.value = curHue.value.toString();
 }
