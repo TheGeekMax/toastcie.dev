@@ -65,6 +65,19 @@
 </template>
 
 <script lang="ts" setup>
+useSeoMeta({
+  title: 'Sandbox x 1D CA',
+  description: 'petit projet qui melange automate cellulaire de dimentios 1 et 2. avec un peu de couleur et beaucoup (beaucoup de sable)',
+  ogTitle: 'Sandbox x 1D CA',
+  ogDescription: 'petit projet qui melange automate cellulaire de dimentios 1 et 2. avec un peu de couleur et beaucoup (beaucoup de sable)',
+  ogImage: '/pictures/thumbnail/casandbox.png',
+  ogUrl: 'https://toastcie.dev',
+  twitterTitle: 'Sandbox x 1D CA',
+  twitterDescription: 'petit projet qui melange automate cellulaire de dimentios 1 et 2. avec un peu de couleur et beaucoup (beaucoup de sable)',
+  twitterImage: '/pictures/thumbnail/casandbox.png',
+  twitterCard: 'summary'
+})
+
 enum c1type{
     None,
     Center,
@@ -419,6 +432,17 @@ function showGrid(){
     --control-radius: 30px;
     --control-background: #07062b;
     --control-border: #4318a0;
+}
+
+#color_range{
+    -webkit-appearance: none;
+    appearance: none;
+    background: linear-gradient(to right, red, orange, yellow, green, cyan, blue, violet,red);
+    height: 8px;
+    border-radius: 5px;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity .2s;
 }
 
 .mega-center {
