@@ -1,6 +1,7 @@
 <template>
     <div class="mega-center">
-        <div>
+        <div id="control-left">
+            <h2>Sandbox</h2>
             <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                 <input type="radio" class="btn-check" name="btnradio" id="color_rb" autocomplete="off" @click="color_set_rainbow" checked>
                 <label class="btn btn-outline-primary" for="color_rb">Rainbow</label>
@@ -8,19 +9,21 @@
                 <input type="radio" class="btn-check" name="btnradio" id="color_bw" autocomplete="off" @click="color_set_bw">
                 <label class="btn btn-outline-primary" for="color_bw">B/W</label>
             </div>
-            <p>{{ curHue }}</p>
-            <div id="colordivshow" :style="`background-color: hsl(${curHue}, 100%, 50%)`"></div>
+            <p><div id="colordivshow" :style="`background-color: hsl(${curHue}, 100%, 50%)`"></div> {{ curHue }}</p>
+            
             <input id="color_range" type="range" min="1" max="360" step="0.5" value="1" @input="update_hue($event)"/>
             <p>auto hue <input type="checkbox" v-model="autohue" /></p>
             <p>hue step <input type="number" v-model="COLOR_STEP" step="0.5" /></p>
             <p>auto remove <input type="checkbox" v-model="autoRemove" /></p>
-            <button @click="reset">clear</button>
-            <input class="d-none" type="checkbox" id="playcheckbox" v-model="play"/>
+            <button class="btn btn-primary" @click="reset">clear</button>
             <label class="btn btn-primary" for="playcheckbox">  {{ playLabel }}</label>
+
+            <input class="d-none" type="checkbox" id="playcheckbox" v-model="play"/>
         </div>
         <canvas id="ca">
         </canvas>
-        <div>
+        <div id="control-right">
+            <h2>1D cellular</h2>
             <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                 <input type="radio" class="btn-check" name="ctype" id="ca_none" autocomplete="off" @click="set_type(c1type.None)">
                 <label class="btn btn-outline-primary" for="ca_none">None</label>
@@ -56,7 +59,7 @@
                 <input class="form-check-input" type="checkbox" v-model="rules[6].value" @change="calcRuleNumber(6)"/>
                 <input class="form-check-input" type="checkbox" v-model="rules[7].value" @change="calcRuleNumber(7)"/>
             </div>
-            <button @click="reset1dca">reset 1D simulation simulation</button>
+            <button class="btn btn-primary" @click="reset1dca">reset 1D simulation simulation</button>
         </div>
     </div>
 </template>
@@ -410,13 +413,21 @@ function showGrid(){
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="css">
+
+:root {
+    --control-radius: 30px;
+    --control-background: #07062b;
+    --control-border: #4318a0;
+}
+
 .mega-center {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .form-check-input{
@@ -435,5 +446,45 @@ function showGrid(){
     width: 32px;
     height: 32px;
     border: 1px solid black;
+}
+
+#control-left{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    padding: 50px;
+    border-top: solid 5px var(--control-border);
+    border-right: solid 5px var(--control-border);
+    border-bottom: solid 5px var(--control-border);
+    border-radius: 0px var(--control-radius) var(--control-radius) 0px;
+    background: var(--control-background);
+    min-width: 20%;
+    min-height:50vh;
+}
+
+#control-left > * {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+#control-right{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    padding: 50px;
+    border-top: solid 5px var(--control-border);
+    border-left: solid 5px var(--control-border);
+    border-bottom: solid 5px var(--control-border);
+    border-radius: var(--control-radius) 0px 0px var(--control-radius);
+    background: var(--control-background);
+    min-width: 20%;
+    min-height:50vh;
+} 
+
+#control-right > * {
+    margin-bottom: 15px;
+    width: 100%;
 }
 </style>
