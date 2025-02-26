@@ -5,9 +5,9 @@
                 <img :src="thumbnail" alt="Project Thumbnail" />
             </div>
             <div class="project-thumb__content">
-                <NuxtLink :to="url"> 
+                <a :href="url"> 
                 <h3>{{ title }}</h3>
-                </NuxtLink>
+                </a>
             </div>
         </div>
     </div>
