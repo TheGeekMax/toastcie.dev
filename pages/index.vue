@@ -12,14 +12,14 @@
                     </div>
                     <div class="d-inline ms-4">
                         <h1>Maxime Sanciaume</h1>
-                        <h2>juste un dev passioné</h2>
+                        <h2>juste un dev passionné</h2>
                         <h3>pour vous montrer mes projets</h3>
                     </div>
                 </div>
             </div>
             <div class="">
-                <NuxtLink to="#rprojs" class="menu btn btn-primary mx-2 mt-3">Projets reecents</NuxtLink>
-                <NuxtLink to="#" class="menu btn btn-primary mx-2 mt-3">Tout mes projets</NuxtLink>
+                <NuxtLink to="#rprojs" class="menu btn btn-primary mx-2 mt-3">Projets récents</NuxtLink>
+                <NuxtLink to="#" class="menu btn btn-primary mx-2 mt-3">Tous mes projets</NuxtLink>
                 <NuxtLink to="#myparcours" class="menu btn btn-primary mx-2 mt-3">Mon parcours</NuxtLink>
                 <NuxtLink to="#contactme" class="menu btn btn-primary mx-2 mt-3">Me contacter</NuxtLink>
             </div>
@@ -46,7 +46,7 @@
 :root{
     --night-1: rgba(15,24,33,1);
     --night-2: rgb(3, 38, 55);
-    --night-3: rgb(50, 34, 1);
+    --night-3: rgb(94, 74, 54);
 }
 
 #scrollspace {
@@ -66,7 +66,7 @@
 
 
 .menu {
-    width:150px;
+    width:200px;
 }
 
 .profile {
