@@ -1,11 +1,11 @@
 <template>
     <Footer>
-        <p>Toastcie.dev &copy; 2024-2025</p>
+        <p>Toastcie.dev &copy; {{ currentYear }}</p>
     </Footer>
 </template>
 
 <script setup>
-
+const currentYear = new Date().getFullYear()
 </script>
 
 <style lang="css" scoped>
